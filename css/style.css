@@ -45,12 +45,13 @@ body {
     line-height: 1.2;
     color: #ffffff;
     text-shadow: 0 0 5px #ffffff;
+    display: inline-block;
 }
 
 /* Responsive design for mobile */
 @media screen and (max-width: 768px) {
     .ascii-art {
-        font-size: 0.4rem;
+        font-size: 0.5rem;
     }
 
     .logo img {
