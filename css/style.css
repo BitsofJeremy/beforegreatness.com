@@ -1,10 +1,59 @@
 /* Custom styles for before greatness */
 
-.b612-mono {
-    font-family: 'B612 Mono', serif;
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
-/* Black background */
 body {
     background-color: #000000;
+    color: #ffffff;
+    font-family: 'Courier New', 'Courier', monospace;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    overflow: hidden;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    padding: 20px;
+}
+
+.content {
+    text-align: center;
+}
+
+.logo {
+    margin-bottom: 2rem;
+}
+
+.logo img {
+    max-width: 256px;
+    width: 100%;
+    height: auto;
+}
+
+.ascii-art {
+    font-size: 0.7rem;
+    white-space: pre;
+    line-height: 1.2;
+    color: #ffffff;
+    text-shadow: 0 0 5px #ffffff;
+}
+
+/* Responsive design for mobile */
+@media screen and (max-width: 768px) {
+    .ascii-art {
+        font-size: 0.4rem;
+    }
+
+    .logo img {
+        max-width: 180px;
+    }
 }
