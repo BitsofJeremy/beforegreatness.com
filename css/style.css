@@ -40,11 +40,13 @@ body {
 }
 
 .ascii-art {
+    font-family: 'Courier New', 'Courier', monospace;
     font-size: 0.7rem;
     white-space: pre;
     line-height: 1.2;
     color: #ffffff;
     text-shadow: 0 0 5px #ffffff;
+    text-align: left;
     display: inline-block;
 }
 
