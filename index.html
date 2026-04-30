@@ -5,21 +5,238 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Before Greatness LLC</title>
     <link rel="icon" type="image/png" href="images/bg_mtn_logo_black_circle_white_logo_icon.ico">
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            /* Typography Scale */
+            --text-hero: clamp(2.5rem, 12vw, 9rem);
+            --text-display: clamp(1.2rem, 4vw, 2.5rem);
+            --text-body: clamp(0.9rem, 2vw, 1.1rem);
+
+            /* Spacing */
+            --space-xs: 0.5rem;
+            --space-sm: 1rem;
+            --space-md: 2rem;
+            --space-lg: 4rem;
+            --space-xl: 8rem;
+
+            /* Colors */
+            --color-bg: #000000;
+            --color-text: #ffffff;
+            --color-secondary: #666666;
+            --color-accent: #3b82f6;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            min-height: 100vh;
+            background-color: var(--color-bg);
+            color: var(--color-text);
+            font-family: 'Space Mono', 'Courier New', monospace;
+            transition: background-color 0.1s ease, color 0.1s ease;
+        }
+
+        /* Scroll Sections */
+        .scroll-section {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: var(--space-md);
+            position: relative;
+        }
+
+        /* Hero Section */
+        .hero {
+            text-align: center;
+        }
+
+        .logo {
+            margin-bottom: var(--space-lg);
+        }
+
+        .logo img {
+            max-width: 200px;
+            height: auto;
+        }
+
+        .hero-title {
+            font-size: var(--text-hero);
+            font-weight: 700;
+            line-height: 0.85;
+            letter-spacing: -0.05em;
+            margin-bottom: var(--space-lg);
+            transition: color 0.5s ease;
+        }
+
+        /* LLC Info Section */
+        .info-section {
+            text-align: center;
+        }
+
+        .info-block {
+            margin-bottom: var(--space-lg);
+        }
+
+        .info-label {
+            font-size: var(--text-body);
+            color: var(--color-secondary);
+            margin-bottom: var(--space-sm);
+            transition: color 0.5s ease;
+        }
+
+        address {
+            font-style: normal;
+            font-size: var(--text-display);
+            line-height: 1.4;
+        }
+
+        .contact {
+            font-size: var(--text-display);
+        }
+
+        .contact a {
+            color: var(--color-text);
+            text-decoration: none;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+
+        .contact a::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--color-accent);
+            transition: width 0.3s ease;
+        }
+
+        .contact a:hover {
+            color: var(--color-accent);
+        }
+
+        .contact a:hover::after {
+            width: 100%;
+        }
+
+        /* Scroll Indicator */
+        .scroll-hint {
+            position: absolute;
+            bottom: var(--space-lg);
+            font-size: 0.8rem;
+            opacity: 0.5;
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(10px); }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .logo img {
+                max-width: 150px;
+            }
+
+            .hero-title {
+                margin-bottom: var(--space-md);
+            }
+
+            address, .contact {
+                font-size: var(--text-body);
+            }
+        }
+    </style>
 </head>
 <body>
-    <div class="container">
-        <div class="content">
-            <h1>Before Greatness LLC</h1>
-            <p>The principal office street address is:</p>
+    <section class="scroll-section hero" id="hero">
+        <div class="logo">
+            <img src="images/BG_MTN_LOGO_WHITE-256w.png" alt="Before Greatness">
+        </div>
+        <h1 class="hero-title">BEFORE<br>GREATNESS</h1>
+        <div class="scroll-hint">scroll</div>
+    </section>
+
+    <section class="scroll-section info-section" id="info">
+        <div class="info-block">
+            <p class="info-label">The principal office street address is:</p>
             <address>
                 1500 N GRANT ST<br>
                 STE N<br>
                 DENVER CO 80203<br>
                 US
             </address>
-            <p>Contact: <a href="mailto:info@beforegreatness.com">info@beforegreatness.com</a></p>
         </div>
-    </div>
+        <div class="info-block">
+            <p class="contact">
+                <a href="mailto:info@beforegreatness.com">info@beforegreatness.com</a>
+            </p>
+        </div>
+    </section>
+
+    <script>
+        // Scroll Color Transition Controller
+        class ScrollColorController {
+            constructor() {
+                this.sections = [
+                    { id: 'hero', bg: '#000000', text: '#ffffff', secondary: '#666666', accent: '#ffffff' },
+                    { id: 'info', bg: '#000000', text: '#888888', secondary: '#ffffff', accent: '#3b82f6' }
+                ];
+                this.init();
+            }
+
+            init() {
+                const options = {
+                    root: null,
+                    rootMargin: '0px',
+                    threshold: 0.5
+                };
+
+                this.observer = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            const sectionId = entry.target.id;
+                            const sectionIndex = this.sections.findIndex(s => s.id === sectionId);
+                            if (sectionIndex !== -1) {
+                                this.applyColors(sectionIndex);
+                            }
+                        }
+                    });
+                }, options);
+
+                this.sections.forEach(section => {
+                    const el = document.getElementById(section.id);
+                    if (el) this.observer.observe(el);
+                });
+            }
+
+            applyColors(index) {
+                const section = this.sections[index];
+                document.body.style.backgroundColor = section.bg;
+                document.body.style.setProperty('--color-text', section.text);
+                document.body.style.setProperty('--color-secondary', section.secondary);
+                document.body.style.setProperty('--color-accent', section.accent);
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            new ScrollColorController();
+        });
+    </script>
 </body>
 </html>
